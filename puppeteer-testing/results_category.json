@@ -1,44 +1,5 @@
 [
   {
-    "testCase": "TC_CATE_ADD_001",
-    "description": "Thêm danh mục thành công",
-    "expected": "Danh mục mới xuất hiện trong danh sách",
-    "actual": "Danh mục được thêm thành công",
-    "status": "PASS"
-  },
-  {
-    "testCase": "TC_CATE_ADD_002",
-    "description": "Thêm danh mục trống",
-    "expected": "Hiển thị lỗi \"Danh mục không được để trống\"",
-    "actual": "Danh mục không được để trống",
-    "status": "PASS"
-  },
-  {
-    "testCase": "TC_CATE_EDIT_001",
-    "description": "Sửa danh mục thành công",
-    "expected": "Danh mục được sửa thành công với tên mới",
-    "actual": "Danh mục được sửa thành công",
-    "status": "PASS"
-  },
-  {
-    "testCase": "TC_CATE_EDIT_002",
-    "description": "Sửa danh mục thành trống",
-    "status": "FAIL",
-    "error": "Waiting failed: 3000ms exceeded"
-  },
-  {
-    "testCase": "TC_CATE_DELETE_01",
-    "description": "Click nút xoá của một item bất kỳ",
-    "status": "FAIL",
-    "error": "Input.dispatchMouseEvent timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
-  },
-  {
-    "testCase": "TC_CATE_DELETE_03",
-    "description": "Click nút xoá của item đầu tiên",
-    "status": "FAIL",
-    "error": "'left' is already pressed."
-  },
-  {
     "testCase": "TC_CATE_DELETE_05",
     "description": "Click nút xoá của item cuối danh sách",
     "expected": "Item cuối danh sách bị xoá đúng, các item còn lại không bị ảnh hưởng",

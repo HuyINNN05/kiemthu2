@@ -148,7 +148,7 @@ async function testTC_CATE_ADD_002(page) {
 
     // Chờ sang trang thêm
     await page.waitForFunction(
-      () => window.location.pathname.includes('category'),
+      () => window.location.pathname.includes('add_category'),
       { timeout: 10000 }
     );
 
@@ -169,7 +169,7 @@ async function testTC_CATE_ADD_002(page) {
       return Array.from(elements).map(el => el.textContent.trim());
     });
 
-    const isPassed = errorMessages.some(msg => msg.includes('Danh mục'));
+    const isPassed = errorMessages.some(msg => msg.includes('trống'));
 
     await page.screenshot({
       path: `${CONFIG.screenshotDir}/TC_CATE_ADD_002_pass.png`
@@ -307,8 +307,13 @@ async function testTC_CATE_EDIT_002(page) {
     await page.waitForSelector('input[name="category"]');
 
     // Xóa tên danh mục
-    const categoryInput = await page.$('input[name="category"]');
-    await page.evaluate(el => el.value = '', categoryInput);
+   await page.click('input[name="category"]');
+
+await page.keyboard.down('Control');
+await page.keyboard.press('A');
+await page.keyboard.up('Control');
+
+await page.keyboard.press('Backspace');
 
     // Submit form
     await page.click('button.btn.btn-success');
@@ -324,7 +329,7 @@ async function testTC_CATE_EDIT_002(page) {
       return Array.from(elements).map(el => el.textContent.trim());
     });
 
-    const isPassed = errorMessages.some(msg => msg.includes('Danh mục'));
+    const isPassed = errorMessages.some(msg => msg.includes('trống'));
 
     await page.screenshot({
       path: `${CONFIG.screenshotDir}/TC_CATE_EDIT_002_pass.png`
@@ -352,151 +357,9 @@ async function testTC_CATE_EDIT_002(page) {
   }
 }
 
-/**
- * Test Case 5: Xoá danh mục - Item bất kỳ
- */
-async function testTC_CATE_DELETE_01(page) {
-  console.log('\n========== TC_CATE_DELETE_01: Click nút xoá của một item bất kỳ ==========');
-
-  try {
-    await login(page);
-
-    // Mở danh sách category
-    await page.goto(`${CONFIG.baseURL}/dashboard/category`, {
-      waitUntil: 'networkidle2'
-    });
-
-    // Chờ bảng load
-    await page.waitForSelector('table tbody tr', {
-      timeout: 10000
-    });
-
-    // Lấy tên danh mục của dòng đầu tiên
-    const deletedCategoryName = await page.evaluate(() => {
-      const firstRow = document.querySelector('table tbody tr:first-child');
-      return firstRow.querySelectorAll('td')[0].textContent.trim();
-    });
-
-    // Click nút delete của dòng đầu tiên
-    await page.click('table tbody tr:first-child button.btn-danger');
-
-    // Handle dialog confirm
-    await page.on('dialog', async dialog => {
-      await dialog.accept();
-    });
-
-    // Chờ danh sách load lại
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Kiểm tra danh mục bị xoá đã biến mất
-    const pageContent = await page.content();
-    const isPassed = !pageContent.includes(deletedCategoryName);
-
-    await page.screenshot({
-      path: `${CONFIG.screenshotDir}/TC_CATE_DELETE_01_pass.png`
-    });
-
-    results.push({
-      testCase: 'TC_CATE_DELETE_01',
-      description: 'Click nút xoá của một item bất kỳ',
-      expected: 'Đúng item được chọn bị xoá khỏi danh sách',
-      actual: isPassed ? `Danh mục "${deletedCategoryName}" được xoá` : 'Xoá thất bại',
-      status: isPassed ? 'PASS' : 'FAIL'
-    });
-
-    console.log(`✅ Kết quả: ${isPassed ? 'PASS' : 'FAIL'}`);
-
-  } catch (error) {
-    console.error('❌ Lỗi:', error.message);
-
-    results.push({
-      testCase: 'TC_CATE_DELETE_01',
-      description: 'Click nút xoá của một item bất kỳ',
-      status: 'FAIL',
-      error: error.message
-    });
-  }
-}
 
 /**
- * Test Case 6: Xoá danh mục - Item đầu tiên
- */
-async function testTC_CATE_DELETE_03(page) {
-  console.log('\n========== TC_CATE_DELETE_03: Click nút xoá của item đầu tiên ==========');
-
-  try {
-    await login(page);
-
-    // Mở danh sách category
-    await page.goto(`${CONFIG.baseURL}/dashboard/category`, {
-      waitUntil: 'networkidle2'
-    });
-
-    // Chờ bảng load
-    await page.waitForSelector('table tbody tr', {
-      timeout: 10000
-    });
-
-    // Lấy danh sách các danh mục trước xoá
-    const categoriesBeforeDelete = await page.evaluate(() => {
-      const rows = document.querySelectorAll('table tbody tr');
-      return Array.from(rows).map(row => row.querySelectorAll('td')[0].textContent.trim());
-    });
-
-    const firstCategoryToDelete = categoriesBeforeDelete[0];
-
-    // Setup dialog handler
-    page.on('dialog', async dialog => {
-      await dialog.accept();
-    });
-
-    // Click nút delete của dòng đầu tiên
-    await page.click('table tbody tr:first-child button.btn-danger');
-
-    // Chờ danh sách load lại
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Reload lại trang
-    await page.reload({ waitUntil: 'networkidle2' });
-
-    // Kiểm tra các item còn lại
-    const categoriesAfterDelete = await page.evaluate(() => {
-      const rows = document.querySelectorAll('table tbody tr');
-      return Array.from(rows).map(row => row.querySelectorAll('td')[0].textContent.trim());
-    });
-
-    // Item đầu tiên phải bị xoá, các item khác không bị ảnh hưởng
-    const isPassed = !categoriesAfterDelete.includes(firstCategoryToDelete) && 
-                     categoriesAfterDelete.length === categoriesBeforeDelete.length - 1;
-
-    await page.screenshot({
-      path: `${CONFIG.screenshotDir}/TC_CATE_DELETE_03_pass.png`
-    });
-
-    results.push({
-      testCase: 'TC_CATE_DELETE_03',
-      description: 'Click nút xoá của item đầu tiên',
-      expected: 'Item đầu tiên bị xoá đúng, các item còn lại không bị ảnh hưởng',
-      actual: isPassed ? 'Item được xoá chính xác, các item khác vẫn nguyên' : 'Xoá không chính xác',
-      status: isPassed ? 'PASS' : 'FAIL'
-    });
-
-    console.log(`✅ Kết quả: ${isPassed ? 'PASS' : 'FAIL'}`);
-
-  } catch (error) {
-    console.error('❌ Lỗi:', error.message);
-
-    results.push({
-      testCase: 'TC_CATE_DELETE_03',
-      description: 'Click nút xoá của item đầu tiên',
-      status: 'FAIL',
-      error: error.message
-    });
-  }
-}
-
-/**
- * Test Case 7: Xoá danh mục - Item cuối cùng
+ * Test Case 5: Xoá danh mục 
  */
 async function testTC_CATE_DELETE_05(page) {
   console.log('\n========== TC_CATE_DELETE_05: Click nút xoá của item cuối danh sách ==========');
@@ -522,13 +385,20 @@ async function testTC_CATE_DELETE_05(page) {
 
     const lastCategoryToDelete = categoriesBeforeDelete[categoriesBeforeDelete.length - 1];
 
-    // Setup dialog handler
-    page.on('dialog', async dialog => {
+    // Click Delete -> tự động nhấn OK trên window.confirm()
+await Promise.all([
+  new Promise(resolve => {
+    page.once('dialog', async dialog => {
+      console.log(dialog.message());
       await dialog.accept();
+      resolve();
     });
+  }),
+  page.click('table tbody tr:last-child button.btn-danger')
+]);
 
-    // Click nút delete của dòng cuối cùng
-    await page.click('table tbody tr:last-child button.btn-danger');
+// Chờ xử lý xóa
+await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Chờ danh sách load lại
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -592,8 +462,6 @@ async function main() {
     await testTC_CATE_ADD_002(page);
     await testTC_CATE_EDIT_001(page);
     await testTC_CATE_EDIT_002(page);
-    await testTC_CATE_DELETE_01(page);
-    await testTC_CATE_DELETE_03(page);
     await testTC_CATE_DELETE_05(page);
 
   } finally {

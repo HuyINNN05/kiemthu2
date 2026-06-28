@@ -43,11 +43,11 @@ const AddCategory = () => {
             <h2>Add Category</h2>
             <form onSubmit={handleSubmit}>
                 <div className='mb-3'>
-                    <label htmlFor="category"><strong>Category:</strong></label>
+                    <label htmlFor="category"><strong>Department:</strong></label>
                     <input 
                         type="text" 
                         name='category' 
-                        placeholder='Enter Category'
+                        placeholder='Enter Department'
                         value={category}
                         onChange={(e) => setCategory(e.target.value)} 
                         className={`form-control rounded-0 ${errors.category ? 'is-invalid' : ''}`}
@@ -55,7 +55,7 @@ const AddCategory = () => {
                     />
                     {errors.category && <div className="text-warning mt-1">{errors.category}</div>}
                 </div>
-                <button className='btn btn-success w-100 rounded-0 mb-2'>Add Category</button>
+                <button className='btn btn-success w-100 rounded-0 mb-2'>Add Department</button>
             </form>
         </div>
     </div>
