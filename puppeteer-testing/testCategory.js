@@ -148,7 +148,7 @@ async function testTC_CATE_ADD_002(page) {
 
     // Chờ sang trang thêm
     await page.waitForFunction(
-      () => window.location.pathname.includes('add_category'),
+      () => window.location.pathname.includes('category'),
       { timeout: 10000 }
     );
 

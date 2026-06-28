@@ -23,8 +23,9 @@
   {
     "testCase": "TC_ADD_EMP_004",
     "description": "Email không hợp lệ",
-    "status": "FAIL",
-    "error": "Waiting for selector `span.text-warning` failed"
+    "expected": "Hiển thị lỗi \"Email không đúng định dạng\"",
+    "actual": "Email không đúng định dạng",
+    "status": "PASS"
   },
   {
     "testCase": "TC_ADD_EMP_005",

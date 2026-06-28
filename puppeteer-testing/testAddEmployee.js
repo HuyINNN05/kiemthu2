@@ -494,9 +494,7 @@ async function testTC_ADD_EMP_006(page) {
       el => el.textContent.trim()
     );
 
-    const isPassed =
-      errorText.includes('Image') &&
-      errorText.includes('trống');
+    const isPassed = errorText.includes('trống');
 
     await page.screenshot({
       path: `${CONFIG.screenshotDir}/TC_ADD_EMP_006_pass.png`

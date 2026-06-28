@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 const CONFIG = {
   baseURL: 'http://localhost:5173',
-  loginEmail: 'a@gmail.com', // sửa lại nếu cần
+  loginEmail: 'a@example.com', // sửa lại nếu cần
   loginPassword: '123',   // sửa lại nếu cần
   headless: false,
   slowMo: 100,

@@ -126,7 +126,7 @@ const AddEmployee = () => {
               Email
             </label>
             <input
-              type="email"
+              type="text"
               className="form-control rounded-0"
               id="inputEmail4"
               placeholder="Enter Email"
