@@ -1,0 +1,44 @@
+[
+  {
+    "testCase": "TC_LI_001",
+    "description": "Đăng nhập thành công",
+    "expected": "Chuyển sang Dashboard",
+    "actual": "Chuyển sang Dashboard",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_LI_002",
+    "description": "Email trống",
+    "expected": "Hiển thị lỗi \"Email không được để trống\"",
+    "actual": "Email và Mật Khẩu không được để trống",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_LI_003",
+    "description": "Mật khẩu trống",
+    "expected": "Hiển thị lỗi \"Mật khẩu không được để trống\"",
+    "actual": "Email và Mật Khẩu không được để trống",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_LI_004",
+    "description": "Mật khẩu sai",
+    "expected": "Hiển thị lỗi \"Email hoặc mật khẩu sai\"",
+    "actual": "wrong email or password",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_LI_005",
+    "description": "Email không tồn tại",
+    "expected": "Hiển thị lỗi",
+    "actual": "wrong email or password",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_LI_006",
+    "description": "Email không hợp lệ",
+    "expected": "Hiển thị lỗi \"Email không đúng định dạng\"",
+    "actual": "",
+    "status": "FAIL"
+  }
+]

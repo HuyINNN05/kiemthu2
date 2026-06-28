@@ -1,0 +1,43 @@
+[
+  {
+    "testCase": "TC_ADD_EMP_001",
+    "description": "Thêm nhân viên thành công",
+    "expected": "Nhân viên được thêm thành công",
+    "actual": "Thêm thành công",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_ADD_EMP_002",
+    "description": "Tên trống",
+    "expected": "Hiển thị lỗi \"Name không được để trống\"",
+    "actual": "Name không được để trống",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_ADD_EMP_003",
+    "description": "Email trống",
+    "expected": "Hiển thị lỗi \"Email không được để trống\"",
+    "actual": "Email không được để trống",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_ADD_EMP_004",
+    "description": "Email không hợp lệ",
+    "status": "FAIL",
+    "error": "Waiting for selector `span.text-warning` failed"
+  },
+  {
+    "testCase": "TC_ADD_EMP_005",
+    "description": "Salary không phải số",
+    "expected": "Hiển thị lỗi \"Salary phải là số dương\"",
+    "actual": "Salary phải là số dương",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_ADD_EMP_006",
+    "description": "Image không được chọn",
+    "expected": "Hiển thị lỗi \"Image không được để trống\"",
+    "actual": "Image không được để trống",
+    "status": "PASS"
+  }
+]

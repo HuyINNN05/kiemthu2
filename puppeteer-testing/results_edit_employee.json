@@ -1,0 +1,42 @@
+[
+  {
+    "testCase": "TC_EDIT_EMP_001",
+    "description": "Sửa nhân viên thành công",
+    "expected": "Nhân viên được cập nhật thành công với salary mới",
+    "actual": "Sửa thành công",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_EDIT_EMP_002",
+    "description": "Tên trống",
+    "status": "FAIL",
+    "error": "Waiting for selector `.text-warning` failed"
+  },
+  {
+    "testCase": "TC_EDIT_EMP_003",
+    "description": "Email trống",
+    "status": "FAIL",
+    "error": "Waiting for selector `.text-warning` failed"
+  },
+  {
+    "testCase": "TC_EDIT_EMP_004",
+    "description": "Salary không hợp lệ",
+    "expected": "Hiển thị lỗi \"Salary phải là số\"",
+    "actual": "Validation không lỗi",
+    "status": "FAIL"
+  },
+  {
+    "testCase": "TC_EDIT_EMP_005",
+    "description": "Không thay đổi gì",
+    "expected": "Quay về trang danh sách mà không thay đổi dữ liệu",
+    "actual": "Quay về danh sách",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_EDIT_EMP_006",
+    "description": "Thay đổi email thành email trùng lặp",
+    "expected": "Hiển thị lỗi \"Email đã tồn tại\"",
+    "actual": "Không có lỗi",
+    "status": "FAIL"
+  }
+]

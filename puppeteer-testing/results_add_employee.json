@@ -1,0 +1,40 @@
+[
+  {
+    "testCase": "TC_ADD_EMP_001",
+    "description": "Thêm nhân viên thành công",
+    "status": "FAIL",
+    "error": "Waiting failed: 10000ms exceeded"
+  },
+  {
+    "testCase": "TC_ADD_EMP_002",
+    "description": "Tên trống",
+    "status": "FAIL",
+    "error": "Waiting for selector `.text-warning` failed"
+  },
+  {
+    "testCase": "TC_ADD_EMP_003",
+    "description": "Email trống",
+    "status": "FAIL",
+    "error": "Waiting for selector `.text-warning` failed"
+  },
+  {
+    "testCase": "TC_ADD_EMP_004",
+    "description": "Mật khẩu trống",
+    "expected": "Hiển thị lỗi \"Mật khẩu không được để trống\"",
+    "actual": "Password không được để trống",
+    "status": "PASS"
+  },
+  {
+    "testCase": "TC_ADD_EMP_005",
+    "description": "Email không hợp lệ",
+    "status": "FAIL",
+    "error": "Waiting for selector `.text-warning` failed"
+  },
+  {
+    "testCase": "TC_ADD_EMP_006",
+    "description": "Email đã tồn tại",
+    "expected": "Hiển thị lỗi \"Email đã tồn tại\" hoặc không thêm thành công",
+    "actual": "Category không được để trống",
+    "status": "PASS"
+  }
+]
